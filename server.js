@@ -22,8 +22,8 @@ app.get('/', function (req, res) {
                         sources: "google-news-in",
                         sortBy: "publishedAt",
                         q: query,
-                        from: '2018-03-01',
-                        to: '2018-03-17',
+                        from: '2017-01-01',
+                        to: '2017-12-30',
                         page: page,
                         apiKey: 'a26c63b4775146c28523e8344091e19a'
                     },
@@ -67,14 +67,28 @@ app.get('/', function (req, res) {
                         if(!obj[moment(item.publishedAt).format('DD-MM-YYYY')]){
                             obj[moment(item.publishedAt).format('DD-MM-YYYY')]=[];
                         }
+                        var newsType;
+                        var titleSentiment = sentiment(item.title).score;
+                        var descSentiment = sentiment(item.description).score;
                         // console.log(moment(item.publishedAt).format('DD-MM-YYYY'));
+                        if(descSentiment ==0){
+                            newsType='Neutral'
+                        }else if(descSentiment>0 &&descSentiment<=5){
+                            newsType='Good'
+                        }else if(descSentiment>5 &&descSentiment<=10){
+                            newsType='Very Good'
+                        }else if(descSentiment>=-5 &&descSentiment<0){
+                            newsType='Bad'
+                        }else if(descSentiment>-5 &&descSentiment<=-10){
+                            newsType='Very Bad'
+                        }
                         obj[moment(item.publishedAt).format('DD-MM-YYYY')].push({
                             date : item.publishedAt,
                             title : item.title,
                             desc : item.description,
                             link : item.link,
-                            sentiment : sentiment(item.title).score,
-                            sentiment2 : sentiment(item.description).score
+                            descSentiment2 : descSentiment,
+                            newsType: newsType
                         });
                     });
                     // console.log('obj----->>',obj);
