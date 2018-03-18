@@ -5,7 +5,7 @@ let request = require("request");
 let sentiment = require('sentiment');
 let async = require('async');
 let moment = require('moment');
-let topGainers = ['pnb'];
+let topGainers = ['Bank Nifty'];
 let allData = [],
     totalLength = null,
     lastDate;
@@ -92,4 +92,3 @@ app.get('/', function (req, res) {
     });
 });
 app.listen(3000);
-
