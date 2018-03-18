@@ -74,13 +74,13 @@ app.get('/', function (req, res) {
                         if(descSentiment ==0){
                             newsType='Neutral'
                         }else if(descSentiment>0 &&descSentiment<=5){
-                            newsType='Good'
+                            newsType='Buy'
                         }else if(descSentiment>5 &&descSentiment<=10){
-                            newsType='Very Good'
+                            newsType='Strong Buy'
                         }else if(descSentiment>=-5 &&descSentiment<0){
-                            newsType='Bad'
+                            newsType='Sell'
                         }else if(descSentiment>-5 &&descSentiment<=-10){
-                            newsType='Very Bad'
+                            newsType='Strong Sell'
                         }
                         obj[moment(item.publishedAt).format('DD-MM-YYYY')].push({
                             date : item.publishedAt,
