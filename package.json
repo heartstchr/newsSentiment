@@ -15,6 +15,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "express": "^4.16.3",
+    "google": "^2.1.0",
     "moment": "^2.21.0",
     "path": "^0.12.7",
     "python-shell": "^0.5.0",
