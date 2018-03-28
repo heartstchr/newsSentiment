@@ -70,7 +70,7 @@ def scrape_ads(text):
 
 
 def do_all_keywords():
-    html = get_google_search_results('open demat account')
+    html = get_google_search_results('Auto insurance')
     scrape_ads(html)
 
 if __name__ == '__main__' :
