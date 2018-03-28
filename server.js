@@ -5,6 +5,7 @@ let request = require("request");
 let sentiment = require('sentiment');
 let async = require('async');
 let moment = require('moment');
+let _=require('underscore');
 let topGainers = ['Bank Nifty'];
 let allData = [],
     totalLength = null,
@@ -99,10 +100,31 @@ app.get('/', function (req, res) {
             }
         });
     }
+    var CACHE_DATA = {};
+    var response = {};
     nodeSentiment(1, (data) => {
         console.log(JSON.stringify(data));
         console.log('Done');
-        res.send(data);
+        _.each(data, (value, key)=> {
+            var innerResponse = {};
+           for(var index = 0; index < value.length ; ++index) {
+                innerResponse[value[index].title] = value[index];
+           }
+           response[key] = [];
+           _.each(innerResponse, function(value, innerKey) {
+              response[key].push(value);
+           });
+           //response[key] = innerResponse;
+        });
+        // for (var index = 0; index < data.length; ++index) {
+        //     CACHE_DATA[data.title] = data;
+        // }
+        // _.each(CACHE_DATA, (value, key) =>{
+        //     console.log(value);
+        //    response.push(value)
+
+        // });
+        res.send(response);
     });
 });
 app.listen(3000);
