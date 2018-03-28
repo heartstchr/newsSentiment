@@ -15,6 +15,7 @@ def get_google_search_results(keywordPhrase):
     """make the GET request to Google.com for the keyword phrase and return the HTML text
     """
     url='http://www.google.com/search?hl=en&q=' + '+'.join(keywordPhrase.split())
+    print url
     req = urllib2.Request(url)
     req.add_header('User-agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.29 Safari/525.13')
     page = urllib2.urlopen(req)
